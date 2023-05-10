@@ -2,16 +2,17 @@
 
 ## 小组成员
 
-- 2021xxxx-姓名 （组长）
-- 2021xxxx-姓名
-- 2021xxxx-姓名
-- 2021xxxx-姓名
+- 2021131064-王议 （组长）
+- 2021131063-朱奎镜
+- 2021131065-谭弘琛
+- 2021131066-彭崚
+- 2021131052-刘鹏
+- 2021131082-母锏亓
 
 
 ## 代码仓库链接
 
-https://github.com/caosbad/blockchain-in-js-workshop-2021(示例用，请根据自身的仓库替换)
-
+https://github.com/ShallWeKissForever/blockchain-in-js-workshop-2021
 
 
 ## 第一课代码
