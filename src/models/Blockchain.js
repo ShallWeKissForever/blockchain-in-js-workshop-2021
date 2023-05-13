@@ -17,7 +17,7 @@ class Blockchain {
     返回当前链中最长的区块信息列表
   */
   longestChain() {
-    let chain = {}
+    let chain = new Array()
     let longestBlock = this.genesis
     for(let tempBlock of Object.values(this.blocks)){
       if(longestBlock.height<tempBlock.height){
