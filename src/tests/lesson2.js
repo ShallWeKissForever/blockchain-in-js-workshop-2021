@@ -77,6 +77,82 @@ const main = () => {
     longestChain[2].hash == thirdBlock.hash,
     `Height block hash should be ${thirdBlock.hash}`,
   )
+
+  let fourthBlock = new Block(
+    blockchain,
+    thirdBlock.hash,
+    4,
+    sha256(new Date().getTime().toString()).toString(),
+  )
+  fourthBlock = calcNonce(fourthBlock)
+  blockchain.blocks[fourthBlock.hash] = fourthBlock
+
+  let fifthBlock = new Block(
+    blockchain,
+    fourthBlock.hash,
+    5,
+    sha256(new Date().getTime().toString()).toString(),
+  )
+  fifthBlock = calcNonce(fifthBlock)
+  blockchain.blocks[fifthBlock.hash] = fifthBlock
+
+  let sixthBlock = new Block(
+    blockchain,
+    fifthBlock.hash,
+    6,
+    sha256(new Date().getTime().toString()).toString(),
+  )
+  sixthBlock = calcNonce(sixthBlock)
+  blockchain.blocks[sixthBlock.hash] = sixthBlock
+
+  let seventhBlock = new Block(
+    blockchain,
+    sixthBlock.hash,
+    7,
+    sha256(new Date().getTime().toString()).toString(),
+  )
+  seventhBlock = calcNonce(seventhBlock)
+  blockchain.blocks[seventhBlock.hash] = seventhBlock
+
+  let eighthBlock = new Block(
+    blockchain,
+    seventhBlock.hash,
+    8,
+    sha256(new Date().getTime().toString()).toString(),
+  )
+  eighthBlock = calcNonce(eighthBlock)
+  blockchain.blocks[eighthBlock.hash] = eighthBlock
+
+  let ninthBlock = new Block(
+    blockchain,
+    eighthBlock.hash,
+    9,
+    sha256(new Date().getTime().toString()).toString(),
+  )
+  ninthBlock = calcNonce(ninthBlock)
+  blockchain.blocks[ninthBlock.hash] = ninthBlock
+
+  let tenthBlock = new Block(
+    blockchain,
+    ninthBlock.hash,
+    10,
+    sha256(new Date().getTime().toString()).toString(),
+  )
+  tenthBlock = calcNonce(tenthBlock)
+  blockchain.blocks[tenthBlock.hash] = tenthBlock
+
+  longestChain = blockchain.longestChain()
+  //储存计算花费的平均时间
+  let allConsumedTime = 0
+  //储存计算花费的平均次数
+  let allConsumedTimes = 0
+  for(let block of Object.values(longestChain)){
+    allConsumedTime += block.caclTime
+    allConsumedTimes += block.caclTimes
+  }
+  console.log(`calc nonce of ${longestChain.length} blocks, 
+  average cost ${allConsumedTime / longestChain.length}s, 
+  average try ${allConsumedTimes / longestChain.length} times`);
 }
 
 main()

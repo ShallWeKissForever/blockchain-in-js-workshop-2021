@@ -11,6 +11,8 @@ class Block {
     this.height=height
     this.hash=hash
     this.nonce=''
+    this.caclTime=0
+    this.caclTimes=0
   }
 
   //验证nonce的前几个0的个数是否符合难度值
