@@ -78,6 +78,8 @@ const main = () => {
     `Height block hash should be ${thirdBlock.hash}`,
   )
 
+  //以下是创建第四到第十个区块
+
   let fourthBlock = new Block(
     blockchain,
     thirdBlock.hash,
@@ -141,15 +143,20 @@ const main = () => {
   tenthBlock = calcNonce(tenthBlock)
   blockchain.blocks[tenthBlock.hash] = tenthBlock
 
+  //以上是创建第四到第十个区块
+
+  //把新创建的区块添加到最长链上
   longestChain = blockchain.longestChain()
   //储存计算花费的平均时间
   let allConsumedTime = 0
   //储存计算花费的平均次数
   let allConsumedTimes = 0
+  //计算平均时间和平均次数
   for(let block of Object.values(longestChain)){
     allConsumedTime += block.caclTime
     allConsumedTimes += block.caclTimes
   }
+  
   console.log(`calc nonce of ${longestChain.length} blocks, 
   average cost ${allConsumedTime / longestChain.length}s, 
   average try ${allConsumedTimes / longestChain.length} times`);
