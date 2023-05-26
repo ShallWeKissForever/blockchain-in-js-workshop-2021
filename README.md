@@ -20,7 +20,7 @@ https://github.com/ShallWeKissForever/blockchain-in-js-workshop-2021
 
 ### 代码 commint 地址
 
-https://github.com/CUITBlockchain/blockchain-in-js-workshop-2021/commit/7b2cfede27648fc2c8f4eca453710f69925abdfc
+https://github.com/CUITBlockchain/blockchain-in-js-workshop-2021/compare/lesson1...ShallWeKissForever:blockchain-in-js-workshop-2021:lesson1
 
 ### 代码截图
 
