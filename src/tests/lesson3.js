@@ -2,6 +2,7 @@ import Block, { DIFFICULTY } from '../models/Block.js'
 import Blockchain from '../models/Blockchain.js'
 import sha256 from 'crypto-js/sha256.js'
 import { calcNonce } from '../utils.js'
+import UTXOPool from '../models/UTXOPool.js'
 
 const main = () => {
   const miner =
@@ -48,9 +49,9 @@ const main = () => {
     sha256(new Date().getTime().toString()).toString(),
     miner,
   )
-
+ 
   nextBlock = calcNonce(nextBlock)
-  // 添加两个区块高度为 2  的的竞争区块
+
   blockchain._addBlock(nextBlock)
 
   let longestChain = blockchain.longestChain()
@@ -84,9 +85,9 @@ const main = () => {
     'Error: blockchain should contain third block',
   )
 
-  console.log(thirdBlock.utxoPool)
+  console.log(thirdBlock.utxoPool.utxos)
   console.assert(
-    thirdBlock.utxoPool.utxos[miner] &&
+    thirdBlock.utxoPool.utxos[miner] &&//utxoId
       thirdBlock.utxoPool.utxos[miner].amount > 0,
     'Error: miner should got BTC',
   )
