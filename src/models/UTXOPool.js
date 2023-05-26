@@ -18,9 +18,8 @@ class UTXOPool {
   /**
    * 将交易的信息更新至 UTXOPool 中
    */
-  addUTXO(UTXO) {
-      //utxo=null
-      this.utxos[UTXO.miner][UTXO.txId]=UTXO
+  addUTXO(utxo) {
+      this.utxos[utxo.txId]=utxo
   }
 
   // 将当前 UXTO 的副本克隆
@@ -28,37 +27,35 @@ class UTXOPool {
     return Object.assign({},this.utxos)
   }
   
-  //将当前的utxoPool制作快照
-  snapshot() {
-    return Object.values(this.utxos).filter((utxo) => !utxo[utxo.miner].isSpent());
-  }
+  // //将当前的utxoPool制作快照
+  // snapshot() {
+  //   return Object.values(this.utxos).filter((utxo) => !utxo.isSpent());
+  // }
 
   // 继承父区块 UTXO 池状态的方法
   inherit(snapshot) {
-    if (snapshot) {
       for (let utxo of Object.values(snapshot)) {
-        this.utxos[utxo.miner] = utxo;
+        this.utxos[utxo.txId] = utxo;
       }
-    }
   }
   
   //将utxoPool回滚到上个快照
-  rollback(prevSnapshot) {
-    for (let utxo in this.utxos) {
-      if (!prevSnapshot.includes(utxo)) {
-        delete this.utxos[utxo.txId];
-      }
-    }
-  }
+  // rollback(prevSnapshot) {
+  //   for (let utxo in this.utxos) {
+  //     if (!prevSnapshot.includes(utxo)) {
+  //       delete this.utxos[utxo.txId];
+  //     }
+  //   }
+  // }
   
-  //更新utxoPool
-   commit(snapshot) {
-    for (let utxo in this.utxos) {
-      if (!snapshot.includes(utxo)) {
-        delete this.utxos[utxo.txId];
-      }
-    }
-  }
+  // //更新utxoPool
+  //  commit(snapshot) {
+  //   for (let utxo in this.utxos) {
+  //     if (!snapshot.includes(utxo)) {
+  //       delete this.utxos[utxo.txId];
+  //     }
+  //   }
+  // }
 
   //获取utxoPool的快照
   getUtxoPoolSnapshot() {

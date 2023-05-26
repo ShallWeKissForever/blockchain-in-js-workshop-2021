@@ -63,6 +63,7 @@ const main = () => {
     nextBlock.hash,
     3,
     sha256(new Date().getTime().toString()).toString(),
+    miner,
   )
 
   thirdBlock = calcNonce(thirdBlock)
@@ -87,7 +88,7 @@ const main = () => {
 
   console.log(thirdBlock.utxoPool.utxos)
   console.assert(
-    thirdBlock.utxoPool.utxos[miner] &&//utxoId
+    thirdBlock.utxoPool.utxos[miner] &&
       thirdBlock.utxoPool.utxos[miner].amount > 0,
     'Error: miner should got BTC',
   )

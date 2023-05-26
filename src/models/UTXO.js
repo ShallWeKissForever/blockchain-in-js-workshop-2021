@@ -1,6 +1,6 @@
 export default class UTXO {
 
-  constructor(txId,address,miner) {
+  constructor(txId,address,height) {
     //针对创币交易来设计
     //输入：无，因为是创币交易
     //输出：矿工地址，比特币数量
@@ -14,17 +14,18 @@ export default class UTXO {
     this.value = 12.5
     //是否被花费
     this.spent = false
-    this.miner = miner
+    //出自哪个区块
+    this.height = height
   }
 
-  isSpent() {
-    if (this.spent&&this.spent==true) {
-      // 如果 utxo 存在，并且其 isSpent 标识为 true，则表示该 UTXO 已被花费
-      return true;
-    } else {
-      // 否则表示该 UTXO 未被花费
-      return false;
-    }
-  }
+  // isSpent() {
+  //   if (this.spent&&this.spent==true) {
+  //     // 如果 utxo 存在，并且其 isSpent 标识为 true，则表示该 UTXO 已被花费
+  //     return true;
+  //   } else {
+  //     // 否则表示该 UTXO 未被花费
+  //     return false;
+  //   }
+  // }
 
 }

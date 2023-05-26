@@ -78,21 +78,21 @@ class Blockchain {
     const prevBlock = this.getPrevBlock(block);
     if (!prevBlock) return;
     
-    // 构造新的UTXO池快照
-    const snapshot = prevBlock.utxoPool.snapshot()
-
-    //继承父区块的utxopool
-    block.coinBase()
-    block.utxoPool.inherit(snapshot)
-
-    //将UTXO池的状态回滚到上一个区块对应的UTXO池状态
-    //block.utxoPool.rollback(prevBlock.utxoPool.getUtxoPoolSnapshot())
+    // // 构造父节点的utxoPool快照
+    // const snapshot = prevBlock.utxoPool.snapshot()
+    let snapshot = prevBlock.utxoPool.clone()
     
     //把coinBase交易加入utxopool
-   
+    block.coinBase()
 
-    // 将新的UTXO池状态更新到最新的状态
-    //block.utxoPool.commit(snapshot)
+    //继承父区块的utxopool
+    block.utxoPool.inherit(snapshot)
+
+    // //将UTXO池的状态回滚到上一个区块对应的UTXO池状态
+    // block.utxoPool.rollback(prevBlock.utxoPool.getUtxoPoolSnapshot())
+    
+    // // 将新的UTXO池状态更新到最新的状态
+    // block.utxoPool.commit(snapshot)
     
     // 将区块添加到区块链中
     this.blocks[block.hash] = block;

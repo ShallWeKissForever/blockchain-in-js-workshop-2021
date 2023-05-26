@@ -46,7 +46,7 @@ class Block {
     //检验nonce是否符合难度值
     if (this.isValid()==true) {
       //创造一个创币utxo
-      let coinBaseUTXO = new UTXO(sha256((new Date().getTime()+Math.random()).toString()).toString(),this.coinbaseBeneficiary)
+      let coinBaseUTXO = new UTXO(sha256((new Date().getTime()+Math.random()).toString()).toString(),this.coinbaseBeneficiary,this.height)
       //把该utxo加入utxopool中
       this.utxoPool.addUTXO(coinBaseUTXO)
     }
