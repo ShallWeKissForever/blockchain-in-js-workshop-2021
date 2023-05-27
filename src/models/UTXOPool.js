@@ -1,17 +1,8 @@
 import UTXO from './UTXO.js'
 
 class UTXOPool {
-  constructor() {
+  constructor(miner) {
     this.utxos = {}
-    /*
-      {
-        miner{
-          {
-
-          }
-        }
-      }
-    */
   }
 
   // 添加交易函数

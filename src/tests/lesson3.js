@@ -86,7 +86,7 @@ const main = () => {
     'Error: blockchain should contain third block',
   )
 
-  console.log(thirdBlock.utxoPool.utxos)
+  console.log(thirdBlock.utxoPool)
   console.assert(
     thirdBlock.utxoPool.utxos[miner] &&
       thirdBlock.utxoPool.utxos[miner].amount > 0,

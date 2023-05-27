@@ -49,6 +49,23 @@ class Block {
       let coinBaseUTXO = new UTXO(sha256((new Date().getTime()+Math.random()).toString()).toString(),this.coinbaseBeneficiary,this.height)
       //把该utxo加入utxopool中
       this.utxoPool.addUTXO(coinBaseUTXO)
+      this.createMinerUtxo()
+      this.utxoPool.utxos[this.coinbaseBeneficiary].amount += 12.5
+    }
+  }
+
+  //如果这个矿工没有账号则创造一个账户utxo
+  createMinerUtxo(){
+    let accountState = false
+    for(let tempUtxo of Object.values(this.utxoPool.utxos)){
+      if (tempUtxo.txId == this.coinbaseBeneficiary) {
+        accountState = true
+        break
+      }
+    }
+    if (accountState==false) {
+      let accountUtxo = new UTXO(this.coinbaseBeneficiary,this.coinbaseBeneficiary,null)
+      this.utxoPool.addUTXO(accountUtxo)
     }
   }
 }

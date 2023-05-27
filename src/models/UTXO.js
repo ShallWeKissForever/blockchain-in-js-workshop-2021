@@ -16,6 +16,8 @@ export default class UTXO {
     this.spent = false
     //出自哪个区块
     this.height = height
+    //金额
+    this.amount = 0
   }
 
   // isSpent() {

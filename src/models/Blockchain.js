@@ -82,11 +82,11 @@ class Blockchain {
     // const snapshot = prevBlock.utxoPool.snapshot()
     let snapshot = prevBlock.utxoPool.clone()
     
-    //把coinBase交易加入utxopool
-    block.coinBase()
-
     //继承父区块的utxopool
     block.utxoPool.inherit(snapshot)
+
+    //把coinBase交易加入utxopool
+    block.coinBase()
 
     // //将UTXO池的状态回滚到上一个区块对应的UTXO池状态
     // block.utxoPool.rollback(prevBlock.utxoPool.getUtxoPoolSnapshot())
