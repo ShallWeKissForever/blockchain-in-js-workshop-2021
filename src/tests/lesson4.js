@@ -66,6 +66,7 @@ const main = () => {
     nextBlock.hash,
     3,
     sha256(new Date().getTime().toString()).toString(),
+    miner,
   )
 
   thirdBlock = calcNonce(thirdBlock)
@@ -105,29 +106,39 @@ const main = () => {
 
   let receiverPubKey =
     '0416fb87fec6248fb55d3f73e5210b51514ebd44e9ff2a5c0af87110e8a39da47bf063ef3cccec58b8b823791a6b62feb24fbd8427ff6782609dd3bda9ea138487'
+  
+  //创建新交易
   let trx = new Transaction(miner, receiverPubKey, 1)
 
+  //检查交易的hash长度是否合法
   assert(validateHash(trx.hash), 'Error: Transaction hash invalid...')
 
+  //检查交易的hash值是否正确
   assert(trx._calculateHash() == trx.hash, 'Error: Trx hash invalid')
 
+  //检查账户余额是否足够
   assert(
     latestUTXOPool.isValidTransaction(miner, 1) == true,
     'Error: trx need to be validate',
   )
 
+  //处理交易
   latestUTXOPool.handleTransaction(trx)
 
+  //检查输入者的账户余额合法性
   assert(
     latestUTXOPool.utxos[miner] && latestUTXOPool.utxos[miner].amount == 36.5,
     'Error: miner should got right balance',
   )
 
+  //检查输出者的账户余额合法性
   assert(
     latestUTXOPool.utxos[receiverPubKey] &&
       latestUTXOPool.utxos[receiverPubKey].amount == 1,
     'Error: receiver should got right balance',
   )
+
+  //到此，完成了一次交易
 
   // 打印最新的 UTXO pool
   log(latestUTXOPool)
