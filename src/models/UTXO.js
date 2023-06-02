@@ -16,6 +16,15 @@ export default class UTXO {
     this.height = height
     //金额
     this.amount = 0
+
+    this.setValue()
+  }
+
+  //判断是否为创币utxo从而设定value值
+  setValue(){
+    if (this.height == null) {
+      this.value = 0
+    }
   }
 
   // isSpent() {
