@@ -42,8 +42,10 @@ isValid() {
  setNonce(nonce) {
     this.nonce=nonce
   }
-
-  //创币utxo
+/**
+ //创币utxo
+ * 
+ */
   coinBase(){
     //检验nonce是否符合难度值
     if (this.isValid()==true) {
@@ -55,8 +57,12 @@ isValid() {
       this.utxoPool.utxos[this.coinbaseBeneficiary].amount += 12.5
     }
   }
-
-  //如果这个矿工没有账号则创造一个账户utxo
+/**
+ * 
+//如果这个矿工没有账号则创造一个账户utxo
+ * @param {*} txId 
+ * @param {*} address 
+ */
   createMinerUtxo(txId,address){
     let accountState = false
     for(let tempUtxo of Object.values(this.utxoPool.utxos)){
@@ -70,45 +76,64 @@ isValid() {
       this.utxoPool.addUTXO(accountUtxo)
     }
   }
-
-  // 根据交易变化更新区块 hash
+/**
+ * 根据交易变化更新区块 hash
+ */
   _setHash() {
     this.hash = sha256((this.hash+this.merkleTreeRoot).toString()).toString()
   }
 
-  // 汇总计算交易的 Hash 值
   /**
+   // 汇总计算交易的 Hash 值
    * 默克尔树实现
    */
   combinedTransactionsHash() {
     return this.merkleTreeRoot.rootHash
   }
 
-  // 添加交易到区块
   /**
+   // 添加交易到区块
    * 需包含 UTXOPool 的更新与 hash 的更新
    * UTXOPool 的更新：从UTXOPool中删除旧的满足这笔交易数额的utxo，添加新的零钱utxo
    *   hash   的更新：根据交易变化更新区块 hash
    */
   addTransaction(tx) {
-    //遍历inputer拥有的满足这笔交易数额的utxo
-    let inputUTXOId = ''
-    for(let tempUtxo of Object.values(this.utxoPool.utxos)){
-      if (tempUtxo.address==tx.inputPublicKey) {
-        if (tempUtxo.values>=tx.amount) {
-          inputUTXOId = tempUtxo.txId
-        }
-      }
-    }
-    //添加新的零钱utxo
 
-    //从UTXOPool中删除utxo
-    //this.utxoPool.deleteUTXO()
-    //处理交易
-    this.utxoPool.handleTransaction(tx)
+    //检查输入者的账户余额是否充足
+    if (!this.utxoPool.isValidTransaction(tx.inputPublicKey,tx.amount)) {
+
     //根据交易变化更新区块 hash
     this.merkleTreeRoot.addElement(tx.hash)
     this._setHash()
+
+    }else{
+
+      //遍历inputer拥有的满足这笔交易数额的utxo
+      let inputUTXOId
+      for(let tempUtxo of Object.values(this.utxoPool.utxos)){
+        if (tempUtxo.address==tx.inputPublicKey) {
+          if (tempUtxo.value>=tx.amount) {
+            inputUTXOId = tempUtxo.txId
+            break
+          }
+        }
+      }
+      //添加新的零钱utxo
+      let newUTXO = new UTXO(sha256((new Date().getTime()+Math.random()).toString()).toString(),tx.outputPublicKey,inputUTXOId,null)
+      newUTXO.value = (this.utxoPool.utxos[inputUTXOId].value - tx.amount)
+      this.utxoPool.addUTXO(newUTXO)
+      //从UTXOPool中删除使用了的utxo
+      this.utxoPool.deleteUTXO(this.utxoPool.utxos[inputUTXOId])
+  
+      //处理交易
+      this.utxoPool.handleTransaction(tx)
+  
+      //根据交易变化更新区块 hash
+      this.merkleTreeRoot.addElement(tx.hash)
+      this._setHash()
+
+    }
+
   }
 
 }

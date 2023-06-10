@@ -62,17 +62,13 @@ class UTXOPool {
       }
     }
     if (accountState==false) {
-      let accountUtxo = new UTXO(outputPublicKey,outputPublicKey,inputPublicKey,null)
+      let accountUtxo = new UTXO(outputPublicKey,outputPublicKey,null,null)
       this.addUTXO(accountUtxo)
     }
   }
 
   // 处理交易函数
   handleTransaction(tx) {
-    //检查输入者的账户余额是否充足
-    if (!this.isValidTransaction(tx.inputPublicKey,tx.amount)) {
-      return
-    }
 
     //如果该账户不存在则创建outputPublicKeyd的utxo账户
     this.createUtxo(tx.outputPublicKey,tx.inputPublicKey)
