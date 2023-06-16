@@ -62,8 +62,8 @@ class TrieNode {
 const trie = new Trie();
 
 trie.insert("apple");
-console.log(trie.search("apple"));   // Output: true
-console.log(trie.search("app"));     // Output: false
-console.log(trie.startsWith("app")); // Output: true
+console.log(trie.search("apple"));   
+console.log(trie.search("app"));     
+console.log(trie.startsWith("app")); 
 trie.insert("app");
-console.log(trie.search("app"));     // Output: true
+console.log(trie.search("app"));     
