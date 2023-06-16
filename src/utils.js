@@ -11,12 +11,13 @@ export const calcNonce = (block) => {
   const start = new Date().getTime()
   let calcTimes = 0
   while (!block.isValid()) {
-    block.setNonce(sha256(new Date().getTime().toString()).toString())
-    calcTimes++
+    block.setNonce(sha256((new Date().getTime()+Math.random()).toString()).toString())
+    block.caclTimes++
   }
   const end = new Date().getTime()
+  block.caclTime = ((end - start) / 1000)
   console.log(
-    `calc nonce cost ${(end - start) / 1000}s, try ${calcTimes} times`,
+    `calc nonce cost ${block.caclTime}s, try ${block.caclTimes} times`,
   )
   return block
 }
