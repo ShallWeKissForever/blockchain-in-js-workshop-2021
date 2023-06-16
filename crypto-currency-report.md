@@ -40,6 +40,25 @@ https://pan.baidu.com/s/1CWr09WkRdu89lu0gQnFnZQ?pwd=zti9#list/path=%2F%E5%8A%A0%
 
 ### 代码 commint 地址
 
+https://github.com/ShallWeKissForever/blockchain-in-js-workshop-2021/blob/lesson1/src/models/Trie.js
+
+### 代码截图
+> 将截图上传至网盘，放入链接即可
+https://pan.baidu.com/s/1CWr09WkRdu89lu0gQnFnZQ?pwd=zti9#list/path=%2F%E5%8A%A0%E5%AF%86%E8%B4%A7%E5%B8%81%E5%AE%9E%E9%AA%8C%E6%88%AA%E5%9B%BE%2FTrie&parentPath=%2F
+![](链接)
+
+
+### 主观与讨论题内容
+
+  
+---
+
+
+## 第三课代码
+
+
+### 代码 commint 地址
+
 https://github.com/CUITBlockchain/blockchain-in-js-workshop-2021/commit/50aa22b6ee9173f0974f23045e6f168b62b1ce56#diff-533b4b584c112260c48e9c6a04487f8649b82ef9e0e777a5745f24afcb7e6aa5
 
 ### 代码截图
@@ -61,27 +80,6 @@ https://pan.baidu.com/s/1CWr09WkRdu89lu0gQnFnZQ?pwd=zti9#list/path=%2F%E5%8A%A0%
 **2. MPT 想要解决的核⼼问题是什么？**
 
   MPT想要解决的核心问题是在以太坊中存储大量数据时需要较高的存储成本和时间复杂度。MPT还有助于提高以太坊的可扩展性，从而支持更多的交易和更大的区块链数据。MPT能够在O(log n)时间内查询任意Key的Value，并且支持快速、安全的并发访问。 MPT还使得以太坊轻松实现存储证明（SPV）等协议，增加可扩展性并提高整个系统的效率。
-  
----
-
-
-## 第三课代码
-
-
-### 代码 commint 地址
-
-https://github.com/CUITBlockchain/blockchain-in-js-workshop-2021/commit/25f3a0d83a9fff2b4514c5503f470df939d0c2af
-
-
-### 代码截图
-
-> 将截图上传至网盘，放入链接即可
-
-![](链接)
-
-
-### 主观与讨论题内容
-
 
 
 ---
